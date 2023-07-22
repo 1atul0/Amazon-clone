@@ -4,19 +4,20 @@ import React from "react";
 import "./Subtotal.css";
 import CurrencyFormat from "react-currency-format";
 import { useStateValue } from "./StateProvider";
+import { getBasketTotal } from "./reducer.js";
 
 function Subtotal() {
   const [{ basket }, dispatch] = useStateValue();//value come from addtocart
   // console.log(basket[0].price)
-  let totalPrice = 0;
+  // let totalPrice = 0;
 
   //sum price of all the basket item
-  for (let i = 0; i < basket.length; i++) {
-    var value = basket[i]?.price;
-    if (value !== undefined) {
-      totalPrice += value;
-    }
-  }
+  // for (let i = 0; i < basket.length; i++) {
+  //   var value = basket[i]?.price;
+  //   if (value !== undefined) {
+  //     totalPrice += value;
+  //   }
+  // }
 
   return (
     <div className="subtotal">
@@ -34,7 +35,7 @@ function Subtotal() {
           </>
         )}
         decimalScale={2}
-        value={totalPrice}
+        value={getBasketTotal(basket)}
         displayType={"text"}
         thousandSeparator={true}
         prefix={"₹ "}
